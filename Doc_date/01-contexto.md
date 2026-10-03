@@ -4,7 +4,7 @@ Marco M1. Copiem para `entregas/01-contexto.md`.
 
 ## 1. Introdução e contexto
 
- O CodeQuest é um quiz de multipla escolha sobre tecnologia que aborda temas como cibersegurança, desenvolvimento front e back-end, internet, história da computação e IA. Desenvolvido para estudantes, profissionais e interessados na área de tecnologia no formato desktop. 
+ O CodeQuest é um quiz de multipla escolha com dez perguntas    sobre tecnologia que aborda temas como cibersegurança, desenvolvimento front e back-end, internet, história da computação e IA. Desenvolvido para estudantes, profissionais e interessados na área de tecnologia no formato desktop. 
 
 ### **Escopo.**
 
@@ -30,11 +30,25 @@ Marco M1. Copiem para `entregas/01-contexto.md`.
 | --- | --- |
 | Estudantes de tecnologia | Responde o Quiz|  
 | Interessandos em tecnologia| Responde o Quiz
-| Quem cadastra perguntas | inserir, deletar, alterar e consultar as questões do Quiz|
+| Aplicador do quiz | inserir, deletar, alterar e consultar as questões do Quiz|
 
 ## 2. Minimundo
 
-Um ou dois parágrafos, na voz de quem encomenda o sistema. É deste texto que saem as entidades e as regras. Cubram pergunta, categoria, fonte, publicador, idioma e alternativas, inclusive a possibilidade de mais de duas alternativas no futuro.
+O sistema consiste em uma aplicação desktop de quiz sobre tecnologia, desenvolvida no idioma Português (PT-BR).
+
+Para iniciar uma partida, o usuário informa apenas o seu nome (nickname), e o sistema gera automaticamente um código único de identificação para registrar seu histórico e posição no placar.
+
+Uma partida é composta por 10 questões de múltipla escolha, que podem ser selecionadas de duas formas:
+
+1. Por categoria específica: questões sorteadas aleatoriamente dentro da categoria escolhida pelo jogador;
+
+2. Modo geral: questões sorteadas aleatoriamente entre todas as categorias cadastradas no banco de dados.
+
+Cada questão possui exatamente 4 alternativas (de A a D), sendo apenas uma correta.
+
+Ao selecionar uma alternativa, o sistema fornece feedback imediato (indicando se o jogador acertou ou errou), exibe a explicação do gabarito e disponibiliza um link de referência externa para aprofundamento.
+
+Ao término das 10 questões, o sistema exibe a pontuação final obtida na rodada e atualiza o ranking geral de jogadores, permitindo comparar o desempenho com os demais participantes.
 
 > 
 
