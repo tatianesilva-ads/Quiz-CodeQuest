@@ -8,12 +8,15 @@ Marco M1. A entrega deste passo é o modelo conceitual: o desenho em `entregas/0
 
 | Entidade | Atributos | Identificador |
 | --- | --- | --- |
-| JOGADOR| CÓDIGO, NOME| CÓDIGO |
-|CATEGORIA| CÓDIGO, NOME| CÓDIGO |
-|QUESTÕES | CÓDIGO, NOME, CATEGORIAFK, RESPOSTAFK, ALTERNATIVAS| CÓDIGO |
-|RESPOSTAS| CÓDIGO, HISTÓRICO, EXPLICAÇÃOFK| CÓDIGO |
-|EXPLICAÇÃO| CÓDIGO, DESCRIÇÃO, REFERÊNCIA, CATEGORIAFK| CÓDIGO |
+| JOGADOR| CÓDIGO, NICKNAME, SENHA, DATA_CADASTRO| CÓDIGO |
+|CATEGORIA| CÓDIGO, NOME, DESCRICAO| CÓDIGO |
+|QUESTÃO | CÓDIGO, ENUNCIADO, DIFICULDADE, EXPLICAÇÃO, REFERÊNCIA, PONTUAÇÃO, CATEGORIAFK| CÓDIGO |
+|PARTIDA | CÓDIGO, MODO_JOGO, JOGADORFK, DATA_INÍCIO, DATA_FIM, PONTUAÇÃO_FINAL, STATUS| CÓDIGO |
+|RESPOSTA| CÓDIGO, ACERTO, ALTERNATIVAFK, PARTIDA_QUESTÃOFK, DATA_RESPOSTA| CÓDIGO |
+|PARTIDA_QUESTÃO| CÓDIGO, PARTIDAFK, QUESTÃOFK, ORDEM| CÓDIGO |
+|ALTERNATIVA| CÓDIGO, QUESTÃOFK, LETRA, TEXTO, CORRETA| CÓDIGO |
 |RANKING | CÓDIGO, PONTUAÇÃO, NOME_JOGADORFK, HISTORICOFK| CÓDIGO
+|ADMINISTRADOR | CÓDIGO, PONTUAÇÃO, NOME_JOGADORFK, HISTORICOFK| CÓDIGO
 
 ## Relacionamentos
 
@@ -21,11 +24,11 @@ Uma frase por linha, ligada a um requisito. Cardinalidade dos dois lados, mínim
 
 | Relacionamento | Cardinalidade | Justificativa | Requisito |
 | --- | --- | --- | --- |
-| JOGADOR - CATEGORIA | 1:1  | Jogador escolhe a categoria | RD04 |
-| CATEGORIA - QUESTÕES | 1:N | Questões são direcionadas a uma determinada categoria  | RD04, RD05 |
-| QUESTÕES - RESPOSTAS | 1:1  | Resposta direcionada de acordo com a questão | RD06, RD07 |
-| RESPOSTAS - EXPLICAÇÃO | 1:1  | Explicação aparece após a resposta ser exibida | RD08, RD09 |
-| RESPOSTAS - RANKING | N:1  | Respostas contabilizadas após o término do Quiz | RD10, RD11 |
-
-
-O diagrama e esta tabela descrevem o mesmo modelo. Toda entidade do desenho está na tabela.
+| JOGADOR realiza PARTIDA | 1:N  | Um jogador pode realizar várias partidas; cada partida pertence a um jogador. | RF04 |
+| CATEGORIA classifica QUESTAO | 1:N | Uma categoria pode possuir várias questões; cada questão pertence a uma categoria.  | RD04, RN06, RN07 |
+| QUESTAO possui ALTERNATIVA | 1:4  | Cada questão possui exatamente quatro alternativas; cada alternativa pertence a uma questão. | RN04, RN09, RF08 |
+| PARTIDA contém PARTIDA_QUESTAO | 1:N  | Uma partida reúne várias questões selecionadas. | RN09, RN10 |
+| QUESTAO participa de PARTIDA_QUESTAO | 1:N  | Uma questão pode ser utilizada em várias partidas diferentes. | RN09 |
+| PARTIDA_QUESTAO recebe RESPOSTA | 1:0..1  | Cada questão apresentada precisa possuir uma resposta. | RA06, RA07, RA10 |
+| ALTERNATIVA é selecionada em RESPOSTA | 1:N  | Uma alternativa pode ser selecionada em respostas de diferentes jogadores e partidas. | RN09 |
+| ADMINISTRADOR|
