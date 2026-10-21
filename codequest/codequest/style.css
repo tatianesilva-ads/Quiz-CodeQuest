@@ -88,14 +88,19 @@ a{color:inherit;text-decoration:none}
 .rank li{display:grid;grid-template-columns:30cqw 1fr;align-items:center;height:2.4cqw;font-size:1.45cqw;color:#fff;text-shadow:var(--borda)}
 .rank li span+span{font-size:1.1cqw}
 .lugar{position:absolute;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
-.lugar .nm{font-size:1.5cqw;color:#fff;text-shadow:var(--borda);white-space:nowrap;margin-bottom:3cqw}
-.p2 .nm{margin-right:20cqw;margin-bottom:2};
+.lugar .nm{font-size:1.5cqw;color:#fff;text-shadow:var(--borda);white-space:nowrap;margin-bottom:3cqw;text-align:center}
 .lugar .cano{height:20cqw}
-.p1{left:50.8cqw}.p1 .cano{--w:9.3cqw;width:9.3cqw;height:15.8cqw}
-.p2{left:41.9cqw}.p2 .cano{--w:8cqw;width:8cqw;height:13.5cqw}
-.p3{left:59.7cqw}.p3 .cano{--w:7cqw;width:7cqw;height:12cqw}
+.p1{left:50cqw}
+.p1 .cano{--w:9.3cqw;width:9.3cqw;height:15.8cqw}
+.p2{left:25cqw}
+.p2 .nm{margin-right:0;margin-bottom:3cqw}
+.p2 .cano{--w:8cqw;width:8cqw;height:13.5cqw}
+.p3{left:75cqw}
+.p3 .cano{--w:7cqw;width:7cqw;height:12cqw}
 .medalha{width:3.8cqw;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;border:.3cqw solid #5a3510;font-size:1.4cqw;color:#5a3510;margin-bottom:.4cqw}
-.ouro{background:#ffc82e}.prata{background:#cfd8e6}.bronze{background:#cd7f4d}
+.ouro{background:#ffc82e}
+.prata{background:#cfd8e6}
+.bronze{background:#cd7f4d}
 
 /* 7. Acessibilidade */
 .acess-painel{left:13.7cqw;top:8.2cqw;width:74.6cqw;height:59.4cqw;padding:6.8cqw 10.6cqw 0}
@@ -111,5 +116,26 @@ a{color:inherit;text-decoration:none}
 .chk:checked{background-image:url(assets/check-on.png)}
 .acoes{position:absolute;left:0;right:0;bottom:4.6cqw;display:flex;justify-content:center;gap:6cqw}
 .acoes .img-btn{position:static;width:18.4cqw}
+.acoes .img-btn{
+  position:relative;
+  width:18.4cqw;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.acoes .img-btn img{
+  width:100%;
+}
+.acoes .img-btn span{
+  position:absolute;
+  left:2.5cqw;
+  right:1cqw;
+  text-align:center;
+  font-size:.85cqw;
+  color:#fff;
+  text-shadow:var(--borda);
+  white-space:nowrap;
+  pointer-events:none;
+}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
