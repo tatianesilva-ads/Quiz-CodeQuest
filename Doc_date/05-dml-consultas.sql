@@ -1,1 +1,0 @@
--- Consultas das tabelas
