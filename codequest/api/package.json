@@ -1,0 +1,16 @@
+{
+  "name": "code-quest-api",
+  "private": true,
+  "description": "API do Code Quest em Node com supabase-js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "dev": "node --watch --env-file=.env server.js"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0"
+  }
+}

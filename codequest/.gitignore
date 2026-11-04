@@ -1,0 +1,14 @@
+# Configurações locais do Claude Code (settings, agents, commands)
+/.claude
+
+# Configuração local de servidores MCP (pode conter tokens/credenciais)
+.mcp.json
+
+# Skills instaladas localmente
+skills-lock.json
+
+# Variáveis de ambiente (URL e anon key do Supabase)
+.env
+
+# Dependências da API (npm install)
+node_modules/
