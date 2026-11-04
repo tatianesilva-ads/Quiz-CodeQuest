@@ -1,6 +1,6 @@
 # Modelo lógico — CodeQuest
 
-Documentação do modelo lógico relacional (diagrama feito no Visual Paradigm). O modelo tem **7 tabelas** e **7 relacionamentos**. O ranking não é uma tabela: ele é obtido por consulta sobre as pontuações das partidas (RD16).
+Documentação do modelo lógico relacional (diagrama feito no Visual Paradigm). O modelo tem **7 tabelas** e **7 relacionamentos**.
 
 ## 1. Visão geral
 
@@ -124,28 +124,3 @@ A tabela **TabelaPartidaQuestao** resolve a relação N:N entre partidas e quest
 | RD07 | TabelaResposta (`id_alternativa`, `acerto`, `data_resposta`) |
 | RD08, RA06 | Chaves estrangeiras entre todas as tabelas |
 | RD16 | Ranking por consulta (view) sobre `pontuacao_final`, sem tabela própria |
-
-## 5. Pontos de atenção e melhorias sugeridas
-
-O diagrama cobre as tabelas e os relacionamentos, mas algumas regras dos requisitos ainda não estão garantidas pela estrutura. As sugestões abaixo são recomendações minhas, não fazem parte do diagrama atual.
-
-| # | Situação | Requisito | Sugestão |
-| --- | --- | --- | --- |
-| 1 | `senha` pode induzir a guardar texto puro | RA13, RNF03 | Renomear para `senha_hash` e armazenar apenas o hash |
-| 2 | Nada impede duas respostas para a mesma questão da partida | RD14, RA10, RN10 | `UNIQUE (id_partida_questao)` em TabelaResposta |
-| 3 | Nada impede a mesma questão duas vezes na partida | RA09, RN08 | `UNIQUE (id_partida, id_questao)` em TabelaPartidaQuestao |
-| 4 | Posição repetida na partida | RA08 | `UNIQUE (id_partida, ordem)` e `CHECK (ordem BETWEEN 1 AND 10)` |
-| 5 | Letra repetida na mesma questão | RN04, RA03 | `UNIQUE (id_questao, letra)` e `CHECK (letra IN ('A','B','C','D'))` |
-| 6 | Mais de uma alternativa correta por questão | RN05 | Índice único parcial em `id_questao` onde `correta = true` |
-| 7 | Exatamente quatro alternativas por questão | RD12, RN04 | Não se resolve só com chave; exige trigger ou validação na carga |
-| 8 | Resposta pode apontar para alternativa de outra questão | RN09 | Trigger, ou chave composta (`id_alternativa`, `id_questao`) |
-| 9 | Valores livres em `status`, `modo_jogo` e `dificuldade` | RA12 | `CHECK` com valores permitidos (ex.: `em_andamento` e `concluida`) |
-| 10 | `data_fim` anterior a `data_inicio` | RD13 | `CHECK (data_fim IS NULL OR data_fim >= data_inicio)` |
-| 11 | Não há como inativar uma questão | RN16, RD15 | Coluna `ativa` em TabelaQuestao e `ON DELETE RESTRICT` nas chaves estrangeiras |
-| 12 | Modo "por categoria" não registra qual categoria foi escolhida | RN06 | Coluna opcional `id_categoria` em TabelaPartida |
-| 13 | Campos obrigatórios | RD10, RA05, RA07 | `NOT NULL` em todos os atributos, exceto `data_fim` (e `id_categoria` da partida, se criada) |
-
-Observações finais:
-- No diagrama, a cardinalidade de "recebe" aparece como `(1:0)`. O mais preciso é **1:0..1**, o que combina com a sugestão nº 2.
-- `acerto` e `pontuacao_final` são valores derivados (da alternativa correta e da soma dos pontos). Mantê-los é aceitável para preservar o histórico (RN12), desde que sejam calculados pelo sistema.
-- O quadro vazio no canto superior esquerdo do diagrama parece um modelo de tabela esquecido. Vale removê-lo antes da entrega.
