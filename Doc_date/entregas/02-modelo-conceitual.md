@@ -2,21 +2,18 @@
 
 Marco M1. A entrega deste passo é o modelo conceitual: o desenho em `entregas/02-conceitual.pdf` (ou `.png`) e as tabelas abaixo.
 
-É um DER na notação de Chen, no brModelo ou no Visual Paradigm Online. Entidades, atributos, relacionamentos e cardinalidades. Ainda não aparecem tabela, chave estrangeira nem tipo de coluna: isso é o modelo lógico, no passo 5.
-
 ## Entidades
 
 | Entidade | Atributos | Identificador |
 | --- | --- | --- |
-| JOGADOR| CÓDIGO, NICKNAME, SENHA, DATA_CADASTRO| CÓDIGO |
-|CATEGORIA| CÓDIGO, NOME, DESCRICAO| CÓDIGO |
-|QUESTÃO | CÓDIGO, ENUNCIADO, DIFICULDADE, EXPLICAÇÃO, REFERÊNCIA, PONTUAÇÃO, CATEGORIAFK| CÓDIGO |
-|PARTIDA | CÓDIGO, MODO_JOGO, JOGADORFK, DATA_INÍCIO, DATA_FIM, PONTUAÇÃO_FINAL, STATUS| CÓDIGO |
-|RESPOSTA| CÓDIGO, ACERTO, ALTERNATIVAFK, PARTIDA_QUESTÃOFK, DATA_RESPOSTA| CÓDIGO |
-|PARTIDA_QUESTÃO| CÓDIGO, PARTIDAFK, QUESTÃOFK, ORDEM| CÓDIGO |
-|ALTERNATIVA| CÓDIGO, QUESTÃOFK, LETRA, TEXTO, CORRETA| CÓDIGO |
+| JOGADOR| CODIGO, NICKNAME (único), SENHA, DATA_CADASTRO| CÓDIGO |
+|CATEGORIA| CODIGO, NOME (único), DESCRICAO| CÓDIGO |
+|QUESTÃO | CODIGO, ENUNCIADO, DIFICULDADE, EXPLICACAO, URL_REFERENCIA, PONTUACAO, ATIVA| CÓDIGO |
+|PARTIDA | CODIGO, MODO_JOGO, DATA_INICIO, DATA_FIM (opcional), STATUS, PONTUACAO_FINAL (derivado)| CÓDIGO |
+|RESPOSTA| CODIGO, ACERTO (derivado), DATA_RESPOSTA| CÓDIGO |
+|PARTIDA_QUESTÃO| CODIGO, ORDEM| CÓDIGO |
+|ALTERNATIVA| CODIGO, LETRA, TEXTO, CORRETA| CÓDIGO |
 |RANKING | CÓDIGO, PONTUAÇÃO, NOME_JOGADORFK, HISTORICOFK| CÓDIGO
-|ADMINISTRADOR | CÓDIGO, PONTUAÇÃO, NOME_JOGADORFK, HISTORICOFK| CÓDIGO
 
 ## Relacionamentos
 
@@ -24,11 +21,11 @@ Uma frase por linha, ligada a um requisito. Cardinalidade dos dois lados, mínim
 
 | Relacionamento | Cardinalidade | Justificativa | Requisito |
 | --- | --- | --- | --- |
-| JOGADOR realiza PARTIDA | 1:N  | Um jogador pode realizar várias partidas; cada partida pertence a um jogador. | RF04 |
-| CATEGORIA classifica QUESTAO | 1:N | Uma categoria pode possuir várias questões; cada questão pertence a uma categoria.  | RD04, RN06, RN07 |
-| QUESTAO possui ALTERNATIVA | 1:4  | Cada questão possui exatamente quatro alternativas; cada alternativa pertence a uma questão. | RN04, RN09, RF08 |
-| PARTIDA contém PARTIDA_QUESTAO | 1:N  | Uma partida reúne várias questões selecionadas. | RN09, RN10 |
-| QUESTAO participa de PARTIDA_QUESTAO | 1:N  | Uma questão pode ser utilizada em várias partidas diferentes. | RN09 |
-| PARTIDA_QUESTAO recebe RESPOSTA | 1:0..1  | Cada questão apresentada precisa possuir uma resposta. | RA06, RA07, RA10 |
-| ALTERNATIVA é selecionada em RESPOSTA | 1:N  | Uma alternativa pode ser selecionada em respostas de diferentes jogadores e partidas. | RN09 |
-| ADMINISTRADOR|
+| JOGADOR realiza PARTIDA | JOGADOR (0,N) — PARTIDA (1,1)  | Um jogador cadastrado pode realizar várias partidas, e cada partida pertence a exatamente um jogador. | RD05, RF05, RN02 |
+| CATEGORIA classifica QUESTAO | CATEGORIA (0,N) — QUESTAO (1,1) | Uma categoria pode classificar várias questões, e cada questão pertence a exatamente uma categoria.  | RD03, RN06, RN07 |
+| QUESTAO possui ALTERNATIVA | QUESTAO (4,4) — ALTERNATIVA (1,1)  | Cada questão possui exatamente quatro alternativas, e cada alternativa pertence a uma única questão. | RD04, RD12, RN04, RA03 |
+| PARTIDA contém PARTIDA_QUESTAO | PARTIDA (10,10) — PARTIDA_QUESTAO (1,1)  | Cada partida reúne dez questões sorteadas, e cada vínculo pertence a uma única partida. | RD06, RN01, RF07, RA09 |
+| QUESTAO participa de PARTIDA_QUESTAO | QUESTAO (0,N) — PARTIDA_QUESTAO (1,1)  | Uma questão pode ser sorteada em várias partidas, ou em nenhuma. | RD06, RN08, RF07 |
+| PARTIDA_QUESTAO recebe RESPOSTA | PARTIDA_QUESTAO (0,1) — RESPOSTA (1,1)  | Cada questão da partida recebe no máximo uma resposta, e nenhuma enquanto não for respondida. | RD07, RD14, RN10, RA10 |
+| ALTERNATIVA é selecionada em RESPOSTA | ALTERNATIVA (0,N) — RESPOSTA (1,1)  | Uma alternativa pode ser escolhida em várias respostas, e cada resposta aponta para uma única alternativa. | RD07, RN09, RF09 |
+| CATEGORIA é escolhida em PARTIDA | CATEGORIA (0,N) — PARTIDA (0,1)  | No modo por categoria, a partida fica ligada à categoria escolhida; no modo geral, não há categoria. | RF06, RN06, RN07 |
