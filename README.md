@@ -151,3 +151,5 @@ supabase/
 | "Sua conta está sem username" | Conta criada sem perfil; apague o usuário no painel e cadastre de novo |
 
 Cada chamada à API aparece no terminal (método, rota, status e tempo), junto com o motivo quando o Supabase recusa algo — é o primeiro lugar para olhar.
+
+Link direto para o Code Quest: quiz-ashy-theta-28.vercel.app/
